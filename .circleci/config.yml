@@ -1,0 +1,64 @@
+version: 2.1
+
+# === ORBS (Plugins) ===
+orbs:
+  # Ensure CIRCLE_COMPARE_URL exists - recommended peer dependency
+  compare-url: iynere/compare-url@1.0.0
+  # Optimizations to cut down on CI runtime
+  runtime-optimizer: rckeller/runtime-optimizer@4.0.0
+
+# === JOBS ===
+jobs:
+  antd:
+    docker:
+      - image: circleci/node:10
+        environment:
+          NODE_ENV: production
+    steps:
+      - checkout
+      - compare-url/reconstruct # ensures CIRCLE_COMPARE_URL exists
+      - runtime-optimizer/halt-if-unchanged:
+          watch: "use-antd"
+      - restore_cache:
+          keys:
+            - v1-repo-build-{{ checksum "antd-app/package-lock.json" }}
+            - v1-repo-build-
+      - run:
+          name: Create React App - antd-app
+          command: |
+            npm i -g create-react-app
+            create-react-app antd-app
+      - run:
+          name: Install and configure @rescripts
+          command: |
+            cd antd-app
+            npm i @rescripts/cli @rescripts/utilities @rescripts/rescript-use-babel-config
+            # Use sed to replace all NPM scripts that invoke react-scripts w/ a rescripts equivalent
+            sed -i 's/: "react-scripts/: "rescripts/g' package.json
+      - run:
+          name: Install and configure @rescripts/use-antd
+          command: |
+            cd antd-app
+            npm i less less-loader antd
+            npm i @rescripts/use-antd@file:../use-antd
+            cp ../use-antd/example/ ./
+            ls -al
+      - save_cache:
+          key: v1-repo-build-{{ checksum "antd-app/package-lock.json" }}
+          paths:
+            - ~/.npm
+      - run: 
+          name: Static Build
+          command: cd antd-app && CI=false npm run build
+      # TODO: Inspect bundle for custom theme
+
+# === WORKFLOWS ===
+workflows:
+  test_rescripts:
+    jobs:
+      - antd:
+          filters:
+            branches:
+              only:
+                master
+                antd
