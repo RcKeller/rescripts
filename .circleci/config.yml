@@ -17,8 +17,8 @@ jobs:
     steps:
       - checkout
       - compare-url/reconstruct # ensures CIRCLE_COMPARE_URL exists
-      # - runtime-optimizer/halt-if-unchanged:
-      #     watch: "use-antd"
+      - runtime-optimizer/halt-if-unchanged:
+          watch: ".circleci use-antd"
       - run:
           name: Create React App - "antd-app"
           command: |
@@ -45,7 +45,7 @@ jobs:
           name: Install @rescripts/use-antd
           command: |
             cd antd-app
-            npm i @rescripts/use-antd@file:../use-antd
+            npm i rescript-use-antd@file:../use-antd
       - run:
           name: Configure create-react-app
           # Use sed to replace all NPM scripts that invoke react-scripts w/ a rescripts equivalent
