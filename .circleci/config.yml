@@ -19,16 +19,15 @@ jobs:
       - compare-url/reconstruct # ensures CIRCLE_COMPARE_URL exists
       # - runtime-optimizer/halt-if-unchanged:
       #     watch: "use-antd"
-      - run: mkdir -p antd-app
-      - restore_cache:
-          keys:
-            - v1-antd-{{ checksum "antd-app/package-lock.json" }}
-            - v1-antd-
       - run:
           name: Create React App - "antd-app"
           command: |
             sudo npm i -g create-react-app
             create-react-app antd-app
+      - restore_cache:
+          keys:
+            - v1-antd-{{ checksum "antd-app/package-lock.json" }}
+            - v1-antd-
       - run:
           name: Install Dependencies
           command: |
@@ -57,7 +56,10 @@ jobs:
           command: cp -r ./use-antd/example ./antd-app && ls -al ./antd-app
       - run: 
           name: Static Build
-          command: cd antd-app && CI=false npm run build
+          command: |
+            cd antd-app
+            npm install
+            CI=false npm run build
       # TODO: Inspect bundle for custom theme
 
 # === WORKFLOWS ===
