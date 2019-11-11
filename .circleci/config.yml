@@ -33,7 +33,7 @@ jobs:
           command: |
             cd antd-app
             echo "Installing @rescripts"
-            npm i @rescripts/cli @rescripts/utilities@0.0.5 @rescripts/rescript-use-babel-config
+            npm i @rescripts/cli@0.0.12 @rescripts/utilities@0.0.5 @rescripts/rescript-use-babel-config
             echo "Installing antd and less"
             npm i less less-loader antd babel-plugin-import
       # save cache before performing a local install of use-antd

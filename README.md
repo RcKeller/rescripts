@@ -8,16 +8,6 @@ These libraries have been released under the [MIT license](../master/LICENSE)
 
 <p align='center'>
 
-<!-- LICENSE -->
-<a href='https://github.com/rescripts/rescripts/blob/master/LICENSE'>
-  <img src='https://img.shields.io/packagist/l/doctrine/orm.svg' />
-</a>
-
-<!-- PRs -->
-<a href='http://makeapullrequest.com'>
-  <img src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square' />
-</a>
-
 <!-- NPM -->
 <a href='https://www.npmjs.com/settings/rckeller/packages'>
   <img src='https://img.shields.io/npm/v/@rescripts/use-antd.svg?style=flat-square' />
@@ -26,6 +16,21 @@ These libraries have been released under the [MIT license](../master/LICENSE)
 <!-- SemVer -->
 <a href='https://semver.org/'>
   <img src='https://img.shields.io/badge/semver-0.0.1-blue.svg?maxAge=2592000'/>
+</a>
+
+<!-- CI/CD -->
+<a href='https://circleci.com/gh/RcKeller/rescripts/tree/master'>
+  <img src='https://circleci.com/gh/RcKeller/rescripts/tree/master.svg?style=svg'/>
+</a>
+
+<!-- LICENSE -->
+<a href='https://github.com/rescripts/rescripts/blob/master/LICENSE'>
+  <img src='https://img.shields.io/packagist/l/doctrine/orm.svg' />
+</a>
+
+<!-- PRs -->
+<a href='http://makeapullrequest.com'>
+  <img src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square' />
 </a>
 
 </p>
