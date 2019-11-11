@@ -17,8 +17,8 @@ jobs:
     steps:
       - checkout
       - compare-url/reconstruct # ensures CIRCLE_COMPARE_URL exists
-      - runtime-optimizer/halt-if-unchanged:
-          watch: "use-antd"
+      # - runtime-optimizer/halt-if-unchanged:
+      #     watch: "use-antd"
       - run: mkdir -p antd-app
       - restore_cache:
           keys:
