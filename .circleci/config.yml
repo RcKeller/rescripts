@@ -19,32 +19,35 @@ jobs:
       - compare-url/reconstruct # ensures CIRCLE_COMPARE_URL exists
       - runtime-optimizer/halt-if-unchanged:
           watch: "use-antd"
+      - run: mkdir -p antd-app
       - restore_cache:
           keys:
-            - v1-repo-build-{{ checksum "antd-app/package-lock.json" }}
-            - v1-repo-build-
+            - v1-antd-{{ checksum "antd-app/package-lock.json" }}
+            - v1-antd-
       - run:
           name: Create React App - antd-app
           command: |
-            npm i -g create-react-app
+            sudo npm i -g create-react-app
             create-react-app antd-app
       - run:
-          name: Install and configure @rescripts
-          command: |
-            cd antd-app
-            npm i @rescripts/cli @rescripts/utilities @rescripts/rescript-use-babel-config
-            # Use sed to replace all NPM scripts that invoke react-scripts w/ a rescripts equivalent
-            sed -i 's/: "react-scripts/: "rescripts/g' package.json
+          name: Install @rescripts
+          command: cd antd-app && npm i @rescripts/cli @rescripts/utilities @rescripts/rescript-use-babel-config
       - run:
-          name: Install and configure @rescripts/use-antd
+          name: Configure create-react-app
+          # Use sed to replace all NPM scripts that invoke react-scripts w/ a rescripts equivalent
+          command: |
+            sed -i 's/: "react-scripts/: "rescripts/g' antd-app/package.json
+      - run:
+          name: Install @rescripts/use-antd
           command: |
             cd antd-app
             npm i less less-loader antd
             npm i @rescripts/use-antd@file:../use-antd
-            cp ../use-antd/example/ ./
-            ls -al
+      - run:
+          name: Load example configuration
+          command: cp -r ../use-antd/example/ ./antd-app && ls -al ./antd-app
       - save_cache:
-          key: v1-repo-build-{{ checksum "antd-app/package-lock.json" }}
+          key: v1-antd-{{ checksum "antd-app/package-lock.json" }}
           paths:
             - ~/.npm
       - run: 
