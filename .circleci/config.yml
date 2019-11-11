@@ -25,31 +25,36 @@ jobs:
             - v1-antd-{{ checksum "antd-app/package-lock.json" }}
             - v1-antd-
       - run:
-          name: Create React App - antd-app
+          name: Create React App - "antd-app"
           command: |
             sudo npm i -g create-react-app
             create-react-app antd-app
       - run:
-          name: Install @rescripts
-          command: cd antd-app && npm i @rescripts/cli @rescripts/utilities @rescripts/rescript-use-babel-config
+          name: Install Dependencies
+          command: |
+            cd antd-app
+            echo "Installing @rescripts"
+            npm i @rescripts/cli @rescripts/utilities @rescripts/rescript-use-babel-config
+            echo "Installing antd and less"
+            npm i less less-loader antd
+      # save cache before performing a local install of use-antd
+      - save_cache:
+          key: v1-antd-{{ checksum "antd-app/package-lock.json" }}
+          paths:
+            - ~/.npm
+      - run:
+          name: Install @rescripts/use-antd
+          command: |
+            cd antd-app
+            npm i @rescripts/use-antd@file:../use-antd
       - run:
           name: Configure create-react-app
           # Use sed to replace all NPM scripts that invoke react-scripts w/ a rescripts equivalent
           command: |
             sed -i 's/: "react-scripts/: "rescripts/g' antd-app/package.json
       - run:
-          name: Install @rescripts/use-antd
-          command: |
-            cd antd-app
-            npm i less less-loader antd
-            npm i @rescripts/use-antd@file:../use-antd
-      - run:
           name: Load example configuration
-          command: cp -r ../use-antd/example/ ./antd-app && ls -al ./antd-app
-      - save_cache:
-          key: v1-antd-{{ checksum "antd-app/package-lock.json" }}
-          paths:
-            - ~/.npm
+          command: cp -r ./use-antd/example ./antd-app && ls -al ./antd-app
       - run: 
           name: Static Build
           command: cd antd-app && CI=false npm run build
