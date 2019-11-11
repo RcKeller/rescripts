@@ -23,7 +23,7 @@ jobs:
           name: Create React App - "antd-app"
           command: |
             sudo npm i -g create-react-app
-            create-react-app antd-app
+            create-react-app antd-app --use-npm
       - restore_cache:
           keys:
             - v1-antd-{{ checksum "antd-app/package-lock.json" }}
@@ -35,7 +35,7 @@ jobs:
             echo "Installing @rescripts"
             npm i @rescripts/cli @rescripts/utilities @rescripts/rescript-use-babel-config
             echo "Installing antd and less"
-            npm i less less-loader antd
+            npm i less less-loader antd babel-plugin-import
       # save cache before performing a local install of use-antd
       - save_cache:
           key: v1-antd-{{ checksum "antd-app/package-lock.json" }}
@@ -53,7 +53,7 @@ jobs:
             sed -i 's/: "react-scripts/: "rescripts/g' antd-app/package.json
       - run:
           name: Load example configuration
-          command: cp -r ./use-antd/example ./antd-app && ls -al ./antd-app
+          command: cp -a -r use-antd/example/. antd-app/ && ls -al antd-app
       - run: 
           name: Static Build
           command: |
