@@ -56,9 +56,10 @@ jobs:
 workflows:
   test_rescripts:
     jobs:
-      - antd:
-          filters:
-            branches:
-              only:
-                master
-                antd
+      - antd
+      # - antd:
+      #     filters:
+      #       branches:
+      #         only:
+      #           master
+      #           antd
