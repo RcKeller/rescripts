@@ -20,9 +20,10 @@
   "license": "MIT",
   "homepage": "https://github.com/RcKeller/rescripts#readme",
   "peerDependencies": {
-    "@rescripts/rescript-use-babel-config": "^0",
-    "@rescripts/utilities": "^0",
-    "babel-plugin-import": "^1",
+    "@rescripts/cli": "^0.0.12",
+    "@rescripts/rescript-use-babel-config": "^0.0.8",
+    "@rescripts/utilities": "0.0.5",
+    "babel-plugin-import": "^1.12.2",
     "less": "^3.10.3",
     "less-loader": "^5.0.0"
   }
