@@ -15,7 +15,7 @@ These libraries have been released under the [MIT license](../master/LICENSE)
 
 <!-- NPM -->
 <a href='https://www.npmjs.com/settings/rckeller/packages'>
-  <img src='https://img.shields.io/npm/v/rescript-use-antd.svg?style=flat-square' />
+  <img src='https://img.shields.io/npm/v/rescript-use-antd.svg' />
 </a>
 
 <!-- LICENSE -->
@@ -25,7 +25,7 @@ These libraries have been released under the [MIT license](../master/LICENSE)
 
 <!-- PRs -->
 <a href='http://makeapullrequest.com'>
-  <img src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square' />
+  <img src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg' />
 </a>
 
 </p>
