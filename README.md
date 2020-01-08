@@ -30,10 +30,10 @@ These libraries have been released under the [MIT license](../master/LICENSE)
 
 </p>
 
-`@rescripts/use-antd` requries several peerdependencies that you must install directly.
+`rescript-use-antd` requries several peerdependencies that you must install directly.
 
 ```
-npm i @rescripts/utilities @rescripts/rescript-use-babel-config @rescripts/use-antd less less-loader antd
+npm i @rescripts/utilities @rescripts/rescript-use-babel-config rescript-use-antd less less-loader antd
 ```
 
 See [this example](./use-antd/example/) for implementation details
